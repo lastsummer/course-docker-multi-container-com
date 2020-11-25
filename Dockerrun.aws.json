@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion":2,
+  "containerDefinitions":[
+    {
+      "name":"client",
+      "image": "summer0531/multi-react",
+      "hostname":"client",
+      "essential": false
+    },
+    {
+      "name":"server",
+      "image": "summer0531/multi-server",
+      "hostname":"api",
+      "essential": false
+    },
+    {
+      "name":"worker",
+      "image": "summer0531/multi-worker",
+      "essential": false
+    },
+    {
+      "name":"nginx",
+      "image": "summer0531/multi-nginx",
+      "essential": true,
+      "portMappings":[
+        {
+          "hostPort":80,
+          "containerPort":80
+        }
+      ],
+      "links":[
+        "client","server"
+      ]
+    }
+  ]
+}
